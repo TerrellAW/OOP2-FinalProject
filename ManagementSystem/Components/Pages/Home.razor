@@ -19,3 +19,38 @@
         - Display a button to enter New Event page
         - Display Weather for that day or "Weather not available for this day"
 -->
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await FetchWeatherAPI();
+    }
+
+    private async Task FetchWeatherAPI()
+    {
+        // Set CWD, needed for API key
+        var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        Directory.SetCurrentDirectory(baseDir);
+
+        // Check CWD, should be in ..\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX
+        Debug.WriteLine($"CWD: {Directory.GetCurrentDirectory()}");
+
+        // Load environment variables
+        Env.Load();
+
+        var apiUrl = Environment.GetEnvironmentVariable("API_URL");
+
+        if (string.IsNullOrEmpty(apiUrl))
+        {
+            Debug.WriteLine("API URL is null or empty.");
+        }
+        else
+        {
+            // Fetch Weather API
+            FetchAPI.FetchWeather(apiUrl);
+        }
+    }
+}
