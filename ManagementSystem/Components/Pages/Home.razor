@@ -58,8 +58,12 @@
         }
         else
         {
-            // Fetch Weather API
-            FetchAPI.FetchWeather(apiUrl);
+            // Ensures API is fetched only once
+            if (FetchAPI.weatherList == null || FetchAPI.weatherList.Count == 0)
+            {
+                // Fetch Weather API
+                FetchAPI.FetchWeather(apiUrl);
+            }
         }
     }
 }
