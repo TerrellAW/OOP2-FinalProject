@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Data
 {
+    // TODO:
+    // 1. Summary comment with class description
+    // 2. Add custom exception class for API related errors
     internal class FetchAPI
     {
         // Lists
@@ -30,12 +33,12 @@ namespace ManagementSystem.Data
 
                 if (!string.IsNullOrEmpty(weatherJson))
                 {
-                    // Parse the JSON data into a dynamic object
+                    // Parse the JSON data into a JsonElement
                     var weatherData = JsonSerializer.Deserialize<JsonElement>(weatherJson);
 
                     if (weatherData.TryGetProperty("days", out JsonElement daysElement) && daysElement.ValueKind == JsonValueKind.Array)
                     {
-                        // Get necessary data from the dynamic object and store in Weather object
+                        // Get necessary data from the JsonElement and store in Weather object
                         foreach (var day in daysElement.EnumerateArray())
                         {
                             string datetime = day.GetProperty("datetime").GetString();

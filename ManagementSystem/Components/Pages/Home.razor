@@ -1,4 +1,6 @@
-﻿@page "/"
+﻿<!-- Use _Imports.razor for all using directives -->
+
+@page "/"
 
 <h1 class="text-center">Event Management System</h1>
 
@@ -6,9 +8,9 @@
 
 <!--
     TODO: Create a Calendar using three lists and CSS:
-    - List 1: Months, depedent on enum
+    - List 1: Months, dependent on enum
     - List 2: Days, dependent on enum
-    - List 3: Dates, numbers dependent on System.DateOnly
+    - List 3: Dates, numbers dependent on System.DateOnly and matching datetime format from API
     - CSS: Use CSS to style Calendar
         > Month on top
         > Days under Month spread out horizontally
@@ -18,10 +20,14 @@
     When a day is clicked:
         - Display a button to enter New Event page
         - Display Weather for that day or "Weather not available for this day"
+        - Highlight Days with future Event
+            > If Day has event, display button to enter EventViewer page for that Day instead
+            > If Day has past event, display button to enter EventHistory for that Day instead
 -->
 
 @code
 {
+    // TODO: Summary comment for documentation
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -37,13 +43,15 @@
 
         // Check CWD, should be in ..\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX
         Debug.WriteLine($"CWD: {Directory.GetCurrentDirectory()}");
-        Debug.WriteLine("Directory should lead to ..\\bin\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\AppX");
+        Debug.WriteLine("Directory should lead to: ..\\bin\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\AppX");
 
         // Load environment variables
         Env.Load();
 
+        // Fetch API URL
         var apiUrl = Environment.GetEnvironmentVariable("API_URL");
 
+        // Check if API URL is null or empty
         if (string.IsNullOrEmpty(apiUrl))
         {
             Debug.WriteLine("API URL is null or empty.");

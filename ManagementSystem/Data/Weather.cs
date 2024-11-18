@@ -7,6 +7,7 @@ using System.Text.Json;
 
 namespace ManagementSystem.Data
 {
+    // TODO: Summary comment with class description
     internal class Weather
     {
         // Fields

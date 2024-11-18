@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Data
 {
+    // TODO: Summary comment with class description
     internal class Calendar
     {
         internal Calendar()
