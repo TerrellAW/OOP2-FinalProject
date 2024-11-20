@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ManagementSystem.Exceptions;
 
 namespace ManagementSystem.Data
 {
     // TODO:
     // 1. Summary comment with class description
-    // 2. Add custom exception class for API related errors
+    // 2. Add custom exception class for API related errors - Complete, but need proper Message
     internal class FetchAPI
     {
         // Lists
@@ -65,7 +66,7 @@ namespace ManagementSystem.Data
                     Debug.WriteLine("Error: Could not retrieve weather data from API.");
                 }
             }
-            catch (HttpRequestException e)
+            catch (APIException e)
             {
                 Debug.WriteLine($"Error fetching weather data: {e.Message}");
             }
