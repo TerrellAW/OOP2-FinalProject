@@ -37,29 +37,29 @@
 
     private async Task FetchWeatherAPI()
     {
-        // Set CWD, needed for API key
-        var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-        Directory.SetCurrentDirectory(baseDir);
-
-        // Check CWD, should be in ..\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX
-        Debug.WriteLine($"CWD: {Directory.GetCurrentDirectory()}");
-        Debug.WriteLine("Directory should lead to: ..\\bin\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\AppX");
-
-        // Load environment variables
-        Env.Load();
-
-        // Fetch API URL
-        var apiUrl = Environment.GetEnvironmentVariable("API_URL");
-
-        // Check if API URL is null or empty
-        if (string.IsNullOrEmpty(apiUrl))
+        // Ensures API is only fetched once and CWD is only set once
+        if (FetchAPI.weatherList == null || FetchAPI.weatherList.Count == 0)
         {
-            Debug.WriteLine("API URL is null or empty.");
-        }
-        else
-        {
-            // Ensures API is fetched only once
-            if (FetchAPI.weatherList == null || FetchAPI.weatherList.Count == 0)
+            // Set CWD, needed for API key
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            Directory.SetCurrentDirectory(baseDir);
+
+            // Check CWD, should be in ..\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX
+            Debug.WriteLine($"CWD: {Directory.GetCurrentDirectory()}");
+            Debug.WriteLine("Directory should lead to: ..\\bin\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\AppX");
+
+            // Load environment variables
+            Env.Load();
+
+            // Fetch API URL
+            var apiUrl = Environment.GetEnvironmentVariable("API_URL");
+
+            // Check if API URL is null or empty
+            if (string.IsNullOrEmpty(apiUrl))
+            {
+                throw new APIConnectionException("API URL is null or empty.");
+            }
+            else
             {
                 // Fetch Weather API
                 FetchAPI.FetchWeather(apiUrl);
