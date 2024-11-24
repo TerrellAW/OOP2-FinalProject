@@ -6,14 +6,34 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Exceptions
 {
+    // Exception class for handling API related errors
     internal class APIException : HttpRequestException
     {
-        // Constructors
-        public APIException() : base()
+        public APIException()
         {
         }
-        // Custom exception
-        internal APIException(string message) : base(message)
+        public APIException(string message) : base(message)
+        {
+        }
+    }
+    // Exception for handling API connection errors
+    internal class APIConnectionException : APIException
+    {
+        public APIConnectionException()
+        {
+        }
+        public APIConnectionException(string message) : base(message)
+        {
+        }
+    }
+
+    // Exception for handling API data errors
+    internal class APIDataException : APIException
+    {
+        public APIDataException()
+        {
+        }
+        public APIDataException(string message) : base(message)
         {
         }
     }

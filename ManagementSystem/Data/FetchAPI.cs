@@ -11,7 +11,12 @@ namespace ManagementSystem.Data
 {
     // TODO:
     // 1. Summary comment with class description
-    // 2. Add custom exception class for API related errors - Complete, but need proper Message
+    // 2. Add custom exception class for API related errors - Complete
+
+    /// <summary>
+    /// FetchAPI class is responsible for fetching weather data from the VisualCrossing API.
+    /// </summary>
+
     internal class FetchAPI
     {
         // Lists
@@ -58,12 +63,12 @@ namespace ManagementSystem.Data
                     }
                     else
                     {
-                        Debug.WriteLine("Error: Could not find 'days' array in JSON data.");
+                        throw new APIDataException("Error: Could not find 'days' array in JSON data.");
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("Error: Could not retrieve weather data from API.");
+                    throw new APIConnectionException("Error: Could not retrieve weather data from API.");
                 }
             }
             catch (APIException e)
