@@ -10,11 +10,23 @@ using ManagementSystem.Exceptions;
 namespace ManagementSystem.Data
 {
     // TODO:
-    // 1. Summary comment with class description
+    // 1. Summary comment with class description - Complete
     // 2. Add custom exception class for API related errors - Complete
+    // 3. Delete TODO comments after time is given for review
 
     /// <summary>
     /// FetchAPI class is responsible for fetching weather data from the VisualCrossing API.
+    /// A static List of Weather objects will store the data for use in the application.
+    /// 
+    /// Steps:
+    /// 1. Create a static List of Weather objects to store the weather data.
+    /// 2. Create a static method to fetch the weather data from the API.
+    /// 3. Use HttpClient to send a GET request to the API.
+    /// 4. Parse the JSON data into a JsonElement.
+    /// 5. Extract the necessary data from the JsonElement and store in a Weather object.
+    /// 6. Add the Weather object to the List.
+    /// 7. Debug output to confirm data is stored in the List.
+    /// 8. Handle exceptions for API connection errors and JSON parsing errors.
     /// </summary>
 
     internal class FetchAPI

@@ -7,7 +7,11 @@ using System.Text.Json;
 
 namespace ManagementSystem.Data
 {
-    // TODO: Summary comment with class description
+    /// <summary>
+    /// Weather class is responsible for storing weather data fetched from the VisualCrossing API.
+    /// The class is a template that specifies what data is needed from the API response.
+    /// The ToString method is overridden to provide a string representation of the object for use in the application.
+    /// </summary>
     internal class Weather
     {
         // Fields
