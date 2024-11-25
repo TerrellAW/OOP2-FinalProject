@@ -15,20 +15,20 @@ namespace ManagementSystem.Data
     internal class Weather
     {
         // Fields
-        private string _datetime = "";
+        private DateTime _date;
         private string _temp = "";
         private string _description = "";
 
         // Properties TODO: Add error handling
-        internal string Datetime
+        internal DateTime Date
         {
             get
             {
-                return _datetime;
+                return _date;
             }
             set
             {
-                _datetime = value;
+                _date = value;
             }
         }
         internal string Temp
@@ -58,9 +58,9 @@ namespace ManagementSystem.Data
         internal Weather()
         {
         }
-        internal Weather(string Datetime, string Temp, string Description)
+        internal Weather(DateTime Date, string Temp, string Description)
         {
-            this.Datetime = Datetime;
+            this.Date = Date;
             this.Temp = Temp;
             this.Description = Description;
         }
@@ -68,7 +68,7 @@ namespace ManagementSystem.Data
         // Methods
         public override string ToString()
         {
-            return $"Datetime: {Datetime}\n Temp: {Temp}\n Description: {Description}";
+            return $"Datetime: {Date}\n Temp: {Temp}\n Description: {Description}";
         }
     }
 }
