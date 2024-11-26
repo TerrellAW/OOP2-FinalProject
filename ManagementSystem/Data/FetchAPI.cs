@@ -10,9 +10,7 @@ using ManagementSystem.Exceptions;
 namespace ManagementSystem.Data
 {
     // TODO:
-    // 1. Summary comment with class description - Complete
-    // 2. Add custom exception class for API related errors - Complete
-    // 3. Delete TODO comments after time is given for review
+    // 1. Make weatherList use a custom linked list implementation of a custom ILinkedListADT
 
     /// <summary>
     /// FetchAPI class is responsible for fetching weather data from the VisualCrossing API.
