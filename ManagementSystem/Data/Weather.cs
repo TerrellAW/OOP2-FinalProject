@@ -15,12 +15,12 @@ namespace ManagementSystem.Data
     internal class Weather
     {
         // Fields
-        private DateTime _date;
+        private string _date;
         private string _temp = "";
         private string _description = "";
 
         // Properties TODO: Add error handling
-        internal DateTime Date
+        internal string Date
         {
             get
             {
@@ -58,7 +58,7 @@ namespace ManagementSystem.Data
         internal Weather()
         {
         }
-        internal Weather(DateTime Date, string Temp, string Description)
+        internal Weather(string Date, string Temp, string Description)
         {
             this.Date = Date;
             this.Temp = Temp;

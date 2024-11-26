@@ -11,7 +11,7 @@ namespace ManagementSystem.Data
         // Fields
         private int _id;
         private string _name;
-        private DateTime _date;
+        private string _date;
         private string _location;
         private string _description;
 
