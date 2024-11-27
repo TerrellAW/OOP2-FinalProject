@@ -9,6 +9,8 @@ namespace ManagementSystem.Data
     // TODO: Summary comment with class description
     internal class Calendar
     {
+        private List<Day> _daysList;
+
         internal Calendar()
         {
         }
