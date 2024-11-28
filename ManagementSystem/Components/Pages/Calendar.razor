@@ -1,4 +1,6 @@
-﻿<!--
+﻿@page "/calendar"
+
+<!--
     TODO: Create a Calendar using three lists and CSS:
     - List 1: Months, dependent on enum
     - List 2: Days, dependent on enum
@@ -23,6 +25,32 @@
     See if you can make each day a button that can be clicked.
 -->
 
-@code {
+<h1>Calendar</h1>
 
+<ul>
+    <li>@monthEnum</li>
+</ul>
+<ul>
+    <li>Sunday</li>
+    <li>Monday</li>
+    <li>Tuesday</li>
+    <li>Wednesday</li>
+    <li>Thursday</li>
+    <li>Friday</li>
+    <li>Saturday</li>
+</ul>
+@foreach (var date in month)
+{
+    <ul>
+        <li></li>
+    </ul>
+}
+
+@code {
+    // TODO: 
+    // 1. Find a way to get the current month's number
+    // 2. Find a way to get the current year and account for leap years in a Month class method
+    // 3. Find a way to get the first day of the month so it can be displayed properly on the calendar
+
+    MonthEnum monthEnum = MonthEnum.GetMonth();
 }
