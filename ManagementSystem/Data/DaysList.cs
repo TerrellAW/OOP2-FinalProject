@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
-    internal class DaysList : ILinkedListADT
+    internal class DaysList : SLL
     {
+        public DaysList()
+        {
+        }
     }
 }
