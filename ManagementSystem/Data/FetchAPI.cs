@@ -30,7 +30,7 @@ namespace ManagementSystem.Data
     internal class FetchAPI
     {
         // Lists
-        internal static List<Weather> weatherList = new List<Weather>();
+        internal static WeatherList weatherList = new WeatherList();
 
         // Methods
         internal static async Task FetchWeather(string apiUrl)
@@ -66,10 +66,7 @@ namespace ManagementSystem.Data
                         }
 
                         // Confirm data is in the list
-                        foreach(var weather in weatherList)
-                        {
-                            Debug.WriteLine(weather.ToString());
-                        }
+                        weatherList.GetData(weatherList.GetSize());
                     }
                     else
                     {
