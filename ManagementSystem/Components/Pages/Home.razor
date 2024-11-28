@@ -18,7 +18,7 @@
         await base.OnInitializedAsync();
 
         // Ensures API is only fetched once and CWD is only set once
-        if (FetchAPI.weatherList == null || FetchAPI.weatherList.Count == 0)
+        if (FetchAPI.weatherList == null || FetchAPI.weatherList.IsEmpty() == true)
         {
             await FetchWeatherAPI();
         }
