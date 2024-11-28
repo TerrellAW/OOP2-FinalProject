@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
-    internal class WeatherList : ILinkedListADT
+    internal class WeatherList : SLL
     {
+        public WeatherList()
+        {
+        }
     }
 }
