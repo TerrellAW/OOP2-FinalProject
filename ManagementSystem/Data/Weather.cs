@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 
-namespace ManagementSystem.Data
+namespace ManagementSystem
 {
     /// <summary>
     /// Weather class is responsible for storing weather data fetched from the VisualCrossing API.
