@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using ManagementSystem.Exceptions;
 
-namespace ManagementSystem.Data
+namespace ManagementSystem
 {
     // TODO:
     // 1. Make weatherList use a custom linked list implementation of a custom ILinkedListADT
@@ -66,7 +66,7 @@ namespace ManagementSystem.Data
                         }
 
                         // Confirm data is in the list
-                        weatherList.GetData(weatherList.GetSize());
+                        weatherList.PrintData(weatherList.GetSize());
                     }
                     else
                     {
