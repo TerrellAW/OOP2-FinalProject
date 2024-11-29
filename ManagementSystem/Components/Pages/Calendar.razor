@@ -52,5 +52,10 @@
     // 2. Find a way to get the current year and account for leap years in a Month class method
     // 3. Find a way to get the first day of the month so it can be displayed properly on the calendar
 
-    MonthEnum monthEnum = MonthEnum.GetMonth();
+    private void DisplayCurrentMonth()
+    {
+        DateList dateList = DateList.ExtractDates(FetchAPI.weatherList);
+
+        EventDateTime currentDate = dateList.GetCurrentDate();
+    }
 }
