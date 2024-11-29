@@ -12,6 +12,6 @@ namespace ManagementSystem
         public bool IsEmpty();
         public void Add(object data);
         public int GetSize();
-        public void GetData(int size);
+        public void PrintData(int size);
     }
 }
