@@ -20,7 +20,7 @@ namespace ManagementSystem
     // TODO:
     // 1. Compare date string to weather date string to get weather for the day
     // 2. Compare date string to event date string to get events for the day
-    internal class Day
+    internal class Day : EventDateTime
     {
         // Fields
         private int _id;
@@ -29,6 +29,6 @@ namespace ManagementSystem
         private Weather _weather;
 
         // Properties
-
+        
     }
 }
