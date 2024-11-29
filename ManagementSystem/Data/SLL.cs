@@ -13,6 +13,11 @@ namespace ManagementSystem
         private Node? _head;
         private int _size;
 
+        public Node? Head
+        {
+            get { return _head; }
+        }
+
         public SLL()
         {
             _head = null;
@@ -54,7 +59,7 @@ namespace ManagementSystem
             return _size;
         }
 
-        public void GetData(int size)
+        public void PrintData(int size)
         {
             object currObj;
             Node? currNode = _head;
@@ -76,6 +81,23 @@ namespace ManagementSystem
                     throw new NoToStringException("Error: Object does not have a ToString() method");
                 }
             }
+        }
+
+        public object GetFromIndex(int index)
+        {
+            object currObj;
+            Node? currNode = _head;
+
+            for (int i = 0; i < index; i++)
+            {
+                if (currNode == null)
+                {
+                    throw new ListNullException("Error: List contains no data");
+                }
+                currNode = currNode.Next;
+            }
+            currObj = currNode.Data;
+            return currObj;
         }
     }
 }
