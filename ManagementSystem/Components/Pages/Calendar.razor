@@ -28,7 +28,7 @@
 <h1>Calendar</h1>
 
 <ul>
-    <li>@monthEnum</li>
+    <li>@DisplayMonthName()</li>
 </ul>
 <ul>
     <li>Sunday</li>
@@ -39,23 +39,32 @@
     <li>Friday</li>
     <li>Saturday</li>
 </ul>
-@foreach (var date in month)
-{
-    <ul>
-        <li></li>
-    </ul>
-}
 
 @code {
     // TODO: 
-    // 1. Find a way to get the current month's number
-    // 2. Find a way to get the current year and account for leap years in a Month class method
-    // 3. Find a way to get the first day of the month so it can be displayed properly on the calendar
+    // 1. Allow displayed month to be changed by buttons, use a bool to determine if calendar should display default month or not
 
-    private void DisplayCurrentMonth()
+    private Month GetCurrentMonth()
     {
         DateList dateList = DateList.ExtractDates(FetchAPI.weatherList);
 
         EventDateTime currentDate = dateList.GetCurrentDate();
+
+        Year currentYear = new Year(currentDate.Year);
+
+        Month currentMonth = new Month();
+
+        currentMonth.MonthNumber = currentDate.Month;
+        currentMonth.MonthName = currentMonth.GetMonthName(currentMonth.MonthNumber);
+        currentMonth.SetDaysInMonth(currentMonth.MonthNumber, currentYear);
+
+        return currentMonth;
+    }
+
+    private string DisplayMonthName()
+    {
+        Month currentMonth = GetCurrentMonth();
+
+        return currentMonth.MonthName;
     }
 }
