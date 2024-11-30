@@ -8,5 +8,15 @@ namespace ManagementSystem
 {
     internal class Year : EventDateTime
     {
+        private int _year;
+
+        public Year() 
+        {
+        }
+
+        public Year(int year)
+        {
+            _year = year;
+        }
     }
 }
