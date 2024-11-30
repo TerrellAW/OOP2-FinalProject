@@ -38,6 +38,12 @@ namespace ManagementSystem
         internal EventDateTime()
         {
         }
-               
+
+        internal EventDateTime(int year, int month, int day)
+        {
+            Year = year;
+            Month = month;
+            Day = day;
+        }
     }
 }
