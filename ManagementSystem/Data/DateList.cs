@@ -6,39 +6,42 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
+    // Unecessary class
     internal class DateList : SLL
     {
         public DateList()
         {
         }
 
-        internal static DateList ExtractDates(WeatherList weatherList)
-        {
-            int i = 0;
-            DateList dateList = new DateList();
-            Weather current = (Weather)weatherList.GetFromIndex(i);
-            EventDateTime dateTime = new EventDateTime();
-            while (current != null)
-            {
-                string[] dateData = current.Date.Split('-');
+        // Worst function ever
+        //internal static DateList ExtractDates(WeatherList weatherList)
+        //{
+        //    int i = 0;
+        //    DateList dateList = new DateList();
+        //    Weather current = (Weather)weatherList.GetFromIndex(i);
+        //    EventDateTime dateTime = new EventDateTime();
+        //    while (current != null)
+        //    {
+        //        string[] dateData = current.Date.Split('-');
 
-                dateTime.Year = int.Parse(dateData[0]);
-                dateTime.Month = int.Parse(dateData[1]);
-                dateTime.Day = int.Parse(dateData[2]);
+        //        dateTime.Year = int.Parse(dateData[0]);
+        //        dateTime.Month = int.Parse(dateData[1]);
+        //        dateTime.Day = int.Parse(dateData[2]);
 
-                dateList.Add(dateTime);
+        //        dateList.Add(dateTime);
 
-                i++;
-                current = (Weather)weatherList.GetFromIndex(i);
-            }
-            return dateList;
-        }
+        //        i++;
+        //        current = (Weather)weatherList.GetFromIndex(i);
+        //    }
+        //    return dateList;
+        //}
 
-        internal EventDateTime GetCurrentDate()
-        {
-            EventDateTime currentDate = (EventDateTime)GetFromIndex(0);
+        // Unecessary function
+        //internal DateTime GetCurrentDate()
+        //{
+        //    DateTime currentDate = DateTime.Now;
 
-            return currentDate;
-        }
+        //    return currentDate;
+        //}
     }
 }
