@@ -61,12 +61,12 @@ namespace ManagementSystem
             }
         }
 
-        internal void SetDaysInMonth(int monthNum, Year currYear)
+        internal void SetDaysInMonth(int monthNum, int currYear)
         {
             if (monthNum == 2)
             {                
                 //Check if year is a leap year
-                if (currYear.Year % 400 == 0 && currYear.Year % 100 == 0 || currYear.Year % 4 == 0)
+                if (currYear % 400 == 0 && currYear % 100 == 0 || currYear % 4 == 0)
                 {
                     _daysInMonth = 29;
                 }
