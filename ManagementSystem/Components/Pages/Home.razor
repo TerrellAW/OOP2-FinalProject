@@ -4,16 +4,11 @@
 
 <h1 class="text-center">Event Management System</h1>
 
-<h3 class="text-center">Event Calendar</h3>
-
-<!--
-    TODO: Show Calendar with future events highlighted
--->
 <Calendar />
 
 @code
 {
-    // TODO: Summary comment for documentation
+    // Special Task method that is called when the component is initialized
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -25,6 +20,18 @@
         }
     }
 
+    /// <summary>
+    /// FetchWeatherAPI method fetches the weather API from the URL provided in the environment variables.
+    /// 
+    /// Steps:
+    /// 1. Set CWD to the base directory of the application.
+    /// 2. Load environment variables.
+    /// 3. Fetch API using URL from environment variables.
+    /// </summary>
+    /// <returns>
+    /// Task of type void.
+    /// </returns>
+    /// <exception cref="APIConnectionException">Thrown when the URL from the environment variables is not correctly loaded.</exception>
     private async Task FetchWeatherAPI()
     {
         // Set CWD, needed for API key

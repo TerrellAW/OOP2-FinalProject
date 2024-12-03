@@ -8,7 +8,10 @@ using ManagementSystem.Exceptions;
 
 namespace ManagementSystem
 {
-    internal abstract class SLL : ILinkedListADT
+    /// <summary>
+    /// Implementation of the ILinkedListADT interface.
+    /// </summary>
+    internal class SLL : ILinkedListADT
     {
         private Node? _head;
         private int _size;
@@ -17,6 +20,10 @@ namespace ManagementSystem
         {
             get { return _head; }
         }
+        public int Size
+        {
+            get { return _size; }
+        }
 
         public SLL()
         {
@@ -24,6 +31,7 @@ namespace ManagementSystem
             _size = 0;
         }
 
+        // Checks if the list is empty by checking if the head is null.
         public bool IsEmpty()
         {
             Node? currNode = _head;
@@ -34,6 +42,7 @@ namespace ManagementSystem
             return false;
         }
 
+        // Adds a new node to the end of the list.
         public void Add(object data)
         {
             Node newNode = new Node(data);
@@ -54,11 +63,7 @@ namespace ManagementSystem
             _size++;
         }
 
-        public int GetSize()
-        {
-            return _size;
-        }
-
+        // Prints the data in the list. Good for debugging.
         public void PrintData(int size)
         {
             object currObj;
@@ -83,6 +88,7 @@ namespace ManagementSystem
             }
         }
 
+        // Returns an object stored at a specific index.
         public object GetFromIndex(int index)
         {
             Node? currNode = _head;

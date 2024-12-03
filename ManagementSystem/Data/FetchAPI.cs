@@ -9,9 +9,6 @@ using ManagementSystem.Exceptions;
 
 namespace ManagementSystem
 {
-    // TODO:
-    // 1. Make weatherList use a custom linked list implementation of a custom ILinkedListADT
-
     /// <summary>
     /// FetchAPI class is responsible for fetching weather data from the VisualCrossing API.
     /// A static List of Weather objects will store the data for use in the application.
@@ -26,11 +23,18 @@ namespace ManagementSystem
     /// 7. Debug output to confirm data is stored in the List.
     /// 8. Handle exceptions for API connection errors and JSON parsing errors.
     /// </summary>
+    /// <returns>
+    /// The weatherList field will be populated with Weather objects containing the weather data.
+    /// Weather data for each day will be displayed in that day's Calendar entry.
+    /// </returns>
+    /// <exception cref="APIException">Thrown when there is an error fetching weather data.</exception>
+    /// <exception cref="APIDataException">Thrown when there is an error parsing the JSON data.</exception>
+    /// <exception cref="APIConnectionException">Thrown when there is an error connecting to the API.</exception>
 
     internal class FetchAPI
     {
         // Lists
-        internal static WeatherList weatherList = new WeatherList();
+        internal static SLL weatherList = new SLL();
 
         // Methods
         internal static async Task FetchWeather(string apiUrl)

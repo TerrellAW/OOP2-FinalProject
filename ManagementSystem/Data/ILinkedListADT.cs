@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
+    /// <summary>
+    /// ADT interface for linked list.
+    /// Includes necessary methods for linked list.
+    /// </summary>
     public interface ILinkedListADT
     {
         public bool IsEmpty();
         public void Add(object data);
-        public int GetSize();
         public void PrintData(int size);
+        public object GetFromIndex(int index);
     }
 }

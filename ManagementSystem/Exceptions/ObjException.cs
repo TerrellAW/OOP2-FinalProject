@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Exceptions
 {
+    // Exception class for handling object related errors
     internal class ObjException : ApplicationException
     {
         public ObjException()
@@ -16,6 +17,7 @@ namespace ManagementSystem.Exceptions
         }
     }
 
+    // Exception for handling objects without a ToString method
     internal class NoToStringException : ObjException
     {
         public NoToStringException()

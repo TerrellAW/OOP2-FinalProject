@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Exceptions
 {
+    // Exception class for handling Singly Linked List related errors
     internal class SLLException : ApplicationException
     {
         public SLLException()
@@ -16,6 +17,7 @@ namespace ManagementSystem.Exceptions
         }
     }
 
+    // Exception for handling null list errors
     internal class ListNullException : SLLException
     {
         public ListNullException()
