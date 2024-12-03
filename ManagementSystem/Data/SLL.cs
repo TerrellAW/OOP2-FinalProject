@@ -85,7 +85,6 @@ namespace ManagementSystem
 
         public object GetFromIndex(int index)
         {
-            object currObj;
             Node? currNode = _head;
 
             for (int i = 0; i < index; i++)
@@ -96,8 +95,7 @@ namespace ManagementSystem
                 }
                 currNode = currNode.Next;
             }
-            currObj = currNode.Data;
-            return currObj;
+            return currNode.Data;
         }
     }
 }
