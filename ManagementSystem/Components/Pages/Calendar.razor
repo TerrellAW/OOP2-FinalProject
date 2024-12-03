@@ -21,24 +21,29 @@
     Create Calendar here so it can be reused as a component.
 
     FOR Ishamjot:
-    Focus on the CSS, enums and dates haven't been set up yet but you can set them up if you want/have time.
+    Focus on the CSS, dates haven't been set up yet but you can set them up if you want/have time.
     See if you can make each day a button that can be clicked.
 -->
+<div>
+    <h1>Calendar</h1>
 
-<h1>Calendar</h1>
-
-<ul>
-    <li>@DisplayMonthName()</li>
-</ul>
-<ul>
-    <li>Sunday</li>
-    <li>Monday</li>
-    <li>Tuesday</li>
-    <li>Wednesday</li>
-    <li>Thursday</li>
-    <li>Friday</li>
-    <li>Saturday</li>
-</ul>
+    <ul>
+        <li>@DisplayMonthName()</li>
+        <li>@DisplayYear()</li>
+    </ul>
+    <!--Buttons will appear as arrows for changing the month forwards or backwards-->
+    <div class="bi bi-left-arrow-calendar"></div>
+    <div class="bi bi-right-arrow-calendar"></div>
+    <ul>
+        <li>Sunday</li>
+        <li>Monday</li>
+        <li>Tuesday</li>
+        <li>Wednesday</li>
+        <li>Thursday</li>
+        <li>Friday</li>
+        <li>Saturday</li>
+    </ul>
+</div>
 
 @code {
     // TODO: 
@@ -48,13 +53,11 @@
     {
         DateTime currentDate = DateTime.Now;
 
-        Year currentYear = new Year(currentDate.Year);
-
         Month currentMonth = new Month();
 
         currentMonth.MonthNumber = currentDate.Month;
         currentMonth.MonthName = currentMonth.GetMonthName(currentMonth.MonthNumber);
-        currentMonth.SetDaysInMonth(currentMonth.MonthNumber, currentYear);
+        currentMonth.SetDaysInMonth(currentMonth.MonthNumber, currentDate.Year);
 
         return currentMonth;
     }
@@ -64,5 +67,12 @@
         Month currentMonth = GetCurrentMonth();
 
         return currentMonth.MonthName;
+    }
+
+    private string DisplayYear()
+    {
+        DateTime currentDate = DateTime.Now;
+
+        return currentDate.Year.ToString();
     }
 }
