@@ -46,9 +46,7 @@
 
     private Month GetCurrentMonth()
     {
-        DateList dateList = DateList.ExtractDates(FetchAPI.weatherList);
-
-        EventDateTime currentDate = dateList.GetCurrentDate();
+        DateTime currentDate = DateTime.Now;
 
         Year currentYear = new Year(currentDate.Year);
 
