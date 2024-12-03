@@ -17,6 +17,7 @@
         if (FetchAPI.weatherList == null || FetchAPI.weatherList.IsEmpty() == true)
         {
             await FetchWeatherAPI();
+            FetchDatabase();
         }
     }
 
@@ -57,6 +58,28 @@
         {
             // Fetch Weather API
             await FetchAPI.FetchWeather(apiUrl);
+        }
+    }
+    private static void FetchDatabase()
+    {
+        // Load environment variables
+        Env.Load();
+
+        // Fetch Database connection string
+        var dbConnString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+        
+        // Check if Database connection string is null or empty
+        if (string.IsNullOrEmpty(dbConnString))
+        {
+            throw new DBConnectionException("Database connection string is null or empty.");
+        }
+        else
+        {
+            // Create Database
+            DBManager.CreateDatabase(dbConnString);
+
+            // Create Table
+            DBManager.CreateTable(dbConnString);
         }
     }
 }
