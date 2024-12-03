@@ -28,6 +28,10 @@ namespace ManagementSystem
             set { _daysInMonth = value; }
         }
 
+        public Month()
+        {
+        }
+
         internal int GetMonthNumber(DateList dateList, int index)
         {
             EventDateTime selectedDate = (EventDateTime)dateList.GetFromIndex(index);
