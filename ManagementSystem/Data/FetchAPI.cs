@@ -70,7 +70,7 @@ namespace ManagementSystem
                         }
 
                         // Confirm data is in the list
-                        weatherList.PrintData(weatherList.GetSize());
+                        weatherList.PrintData(weatherList.Size);
                     }
                     else
                     {
