@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
-    internal class Month : EventDateTime
+    internal class Month : EventDate
     {
         private int _monthNumber;
         private string _monthName;
@@ -32,9 +32,9 @@ namespace ManagementSystem
         {
         }
 
-        internal int GetMonthNumber(DateList dateList, int index)
+        internal int GetMonthNumber(SLL dateList, int index)
         {
-            EventDateTime selectedDate = (EventDateTime)dateList.GetFromIndex(index);
+            EventDate selectedDate = (EventDate)dateList.GetFromIndex(index);
 
             int monthNum = selectedDate.Month;
 

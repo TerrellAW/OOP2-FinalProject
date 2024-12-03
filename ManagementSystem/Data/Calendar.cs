@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Data
 {
-    // TODO: Summary comment with class description
+    // TODO: Delete this class if its not necessary for Calendar functionality
     internal class Calendar
     {
-        private List<Day> _daysList;
+        private SLL _daysList;
 
         internal Calendar()
         {
