@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
-    internal class Year : EventDateTime
+    internal class Year : EventDate
     {
         private int _year;
 
