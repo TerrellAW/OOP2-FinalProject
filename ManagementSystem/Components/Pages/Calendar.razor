@@ -24,17 +24,20 @@
     Focus on the CSS, dates haven't been set up yet but you can set them up if you want/have time.
     See if you can make each day a button that can be clicked.
 -->
-<div>
-    <h1>Calendar</h1>
-
-    <ul>
-        <li>@DisplayMonthName()</li>
-        <li>@DisplayYear()</li>
-    </ul>
+    <h1>Calendar </h1>
+<h2>@DisplayMonthAndYear()</h2>
     <!--Buttons will appear as arrows for changing the month forwards or backwards-->
-    <div class="bi bi-left-arrow-calendar"></div>
-    <div class="bi bi-right-arrow-calendar"></div>
-    <ul>
+    <div class="nav-container">
+    <button @onclick="ChangeToPreviousMonth" class="nav-button">
+        <span class="bi bi-left-arrow-calendar"></span> 
+    </button>
+    <button @onclick="ChangeToNextMonth" class="nav-button">
+        <span class="bi bi-right-arrow-calendar"></span>
+    </button>
+</div>
+
+    <div class="Calendar-header">
+    <ul class="week-container">
         <li>Sunday</li>
         <li>Monday</li>
         <li>Tuesday</li>
@@ -44,35 +47,62 @@
         <li>Saturday</li>
     </ul>
 </div>
+<div class="calendar-template">
+        @foreach (var day in GetDaysInCurrentMonth())
+        {
+        @if (day != -1) 
+        {
+            <button class="date-button">@day</button>
+        }
+        else
+        {
+            <button class="date-button"></button>
+           
+        }
+        }
+    </div>
+
 
 @code {
     // TODO: 
     // 1. Allow displayed month to be changed by buttons, use a bool to determine if calendar should display default month or not
 
-    private Month GetCurrentMonth()
+    private DateTime currentDate = DateTime.Now;
+
+
+    private void ChangeToNextMonth()
     {
-        DateTime currentDate = DateTime.Now;
-
-        Month currentMonth = new Month();
-
-        currentMonth.MonthNumber = currentDate.Month;
-        currentMonth.MonthName = currentMonth.GetMonthName(currentMonth.MonthNumber);
-        currentMonth.SetDaysInMonth(currentMonth.MonthNumber, currentDate.Year);
-
-        return currentMonth;
+        currentDate = currentDate.AddMonths(1);
     }
 
-    private string DisplayMonthName()
+    private void ChangeToPreviousMonth()
     {
-        Month currentMonth = GetCurrentMonth();
-
-        return currentMonth.MonthName;
+        currentDate = currentDate.AddMonths(-1);
     }
 
-    private string DisplayYear()
+    private string DisplayMonthAndYear()
     {
-        DateTime currentDate = DateTime.Now;
+        return currentDate.ToString("MMMM yyyy");
+    }
 
-        return currentDate.Year.ToString();
+    private List<int> GetDaysInCurrentMonth()
+    {
+        List<int> days = new List<int>();
+
+        DateTime firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+        int daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
+
+        int dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+        for (int i = 0; i < dayOfWeek; i++)
+        {
+            days.Add(-1); 
+        }
+
+        for (int day = 1; day <= daysInMonth; day++)
+        {
+            days.Add(day);
+        }
+
+        return days;
     }
 }
