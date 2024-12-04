@@ -4,10 +4,18 @@
 
 <h1 class="text-center">Event Management System</h1>
 
-<Calendar />
+<Calendar DisplayDay="OpenPopup" />
+
+@if (showPopup)
+{
+    <Day SelectedDate="selectedDate" OnClose="ClosePopup" />
+}
 
 @code
 {
+    private bool showPopup = false;
+    private DateTime selectedDate;
+
     // Special Task method that is called when the component is initialized
     protected override async Task OnInitializedAsync()
     {
@@ -81,5 +89,16 @@
             // Create Table
             DBManager.CreateTable(dbConnString);
         }
+    }
+
+    private void OpenPopup(DateTime date)
+    {
+        selectedDate = date;
+        showPopup = true;
+    }
+
+    private void ClosePopup()
+    {
+        showPopup = false;
     }
 }

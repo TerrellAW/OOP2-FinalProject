@@ -1,0 +1,33 @@
+﻿<div>
+    <h2>@SelectedDate.ToString("dd-MM-yyyy")</h2>
+    <p>@GetWeatherForSelectedDate()</p>
+    <!--<p>@DisplayEvents</p>-->
+    <!--<button @onclick="CreateEvent">Create New Event</button>-->
+    <button @onclick="ClosePopup">Close</button>
+</div>
+
+@code {
+    [Parameter]
+    public DateTime SelectedDate { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private string GetWeatherForSelectedDate()
+    {
+        string date = SelectedDate.ToString("yyyy-MM-dd");
+
+        Weather? matchingWeather = FetchAPI.weatherList.GetWeatherDataByDate(date);
+
+        if (matchingWeather == null)
+        {
+            return "No weather data available.";
+        }
+        return matchingWeather.ToString();
+    }
+
+    private async Task ClosePopup()
+    {
+        await OnClose.InvokeAsync(null);
+    }
+}

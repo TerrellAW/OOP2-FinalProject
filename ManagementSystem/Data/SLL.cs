@@ -54,7 +54,7 @@ namespace ManagementSystem
                 _size++;
                 return;
             }
-            while(currNode.Next != null)
+            while (currNode.Next != null)
             {
                 currNode = currNode.Next;
             }
@@ -102,6 +102,21 @@ namespace ManagementSystem
                 currNode = currNode.Next;
             }
             return currNode.Data;
+        }
+        // Returns a field from an object stored in the list if it matches the data passed in.
+        public Weather? GetWeatherDataByDate(string date)
+        {
+            Node? currNode = _head;
+
+            while (currNode != null)
+            {
+                if (currNode.Data is Weather weather && weather.Date == date)
+                {
+                    return weather;
+                }
+                currNode = currNode.Next;
+            }
+            return null;
         }
     }
 }
