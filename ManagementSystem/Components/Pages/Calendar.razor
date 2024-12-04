@@ -24,19 +24,15 @@
     Focus on the CSS, dates haven't been set up yet but you can set them up if you want/have time.
     See if you can make each day a button that can be clicked.
 -->
-    <h1>Calendar </h1>
-<h2>@DisplayMonthAndYear()</h2>
+<h1>Calendar </h1>
+    <h2>@DisplayMonthAndYear()</h2>
     <!--Buttons will appear as arrows for changing the month forwards or backwards-->
     <div class="nav-container">
-    <button @onclick="ChangeToPreviousMonth" class="nav-button">
-        <span class="bi bi-left-arrow-calendar"></span> 
-    </button>
-    <button @onclick="ChangeToNextMonth" class="nav-button">
-        <span class="bi bi-right-arrow-calendar"></span>
-    </button>
+    <div @onclick="ChangeToPreviousMonth" class="bi bi-left-arrow-calendar"></div>
+    <div @onclick="ChangeToNextMonth" class="bi bi-right-arrow-calendar"></div>
 </div>
 
-    <div class="Calendar-header">
+<div class="Calendar-header">
     <ul class="week-container">
         <li>Sunday</li>
         <li>Monday</li>
@@ -48,27 +44,29 @@
     </ul>
 </div>
 <div class="calendar-template">
-        @foreach (var day in GetDaysInCurrentMonth())
-        {
+    @foreach (var day in GetDaysInCurrentMonth())
+    {
         @if (day != -1) 
         {
-            <button class="date-button">@day</button>
+            <button @onclick="() => OnDayClick(new DateTime(currentDate.Year, currentDate.Month, day))" class="date-button">@day</button>
         }
         else
         {
             <button class="date-button"></button>
            
         }
-        }
-    </div>
-
+    }
+</div>
+<div class="mb-5"></div>
 
 @code {
-    // TODO: 
-    // 1. Allow displayed month to be changed by buttons, use a bool to determine if calendar should display default month or not
+        // TODO: 
+        // 1. Allow displayed month to be changed by buttons, use a bool to determine if calendar should display default month or not
 
     private DateTime currentDate = DateTime.Now;
 
+    [Parameter]
+    public EventCallback<DateTime> DisplayDay { get; set; }
 
     private void ChangeToNextMonth()
     {
@@ -104,5 +102,10 @@
         }
 
         return days;
+    }
+
+    private void OnDayClick(DateTime date)
+    {
+        DisplayDay.InvokeAsync(date);
     }
 }
