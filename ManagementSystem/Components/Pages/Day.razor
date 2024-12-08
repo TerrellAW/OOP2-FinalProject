@@ -1,11 +1,15 @@
 ﻿<div>
-    <h2>@SelectedDate.ToString("dd-MM-yyyy")</h2>
-    <p>@GetWeatherForSelectedDate()</p>
-    <!--<p>@DisplayEvents</p>-->
+    <div class="d-flex justify-content-end">
+        <div class="btn bi bi-x-close" @onclick="ClosePopup"></div>
+    </div>
+    <div class="d-flex flex-column align-items-center">
+        <h2>@SelectedDate.ToString("dd-MM-yyyy")</h2>
+        <p>@DisplayEvents()</p>
+        <p>@(new MarkupString(GetWeatherForSelectedDate()))</p>
+    </div>
     <div class="mt-5 d-flex justify-content-center">
         <NavLink href="./new-event" class="event-manager-button size-medium text-center text-decoration-none">Create New Event</NavLink>
     </div>
-    <button @onclick="ClosePopup">Close</button>
 </div>
 
 @code {
@@ -25,7 +29,14 @@
         {
             return "No weather data available.";
         }
-        return matchingWeather.ToString();
+        string weatherString = matchingWeather.ToString();
+        return matchingWeather.FormatForHTML(weatherString);
+    }
+
+    private string DisplayEvents()
+    {
+        //TODO: Display list of events for selected date
+        return "No events on this day.";
     }
 
     private async Task ClosePopup()

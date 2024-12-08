@@ -12,7 +12,7 @@ namespace ManagementSystem
     /// The class is a template that specifies what data is needed from the API response.
     /// The ToString method is overridden to provide a string representation of the object for use in the application.
     /// </summary>
-    internal class Weather
+    internal class Weather : Pages
     {
         // Fields
         private string _date;
@@ -69,6 +69,11 @@ namespace ManagementSystem
         public override string ToString()
         {
             return $"Datetime: {Date}\n Temp: {Temp}\n Description: {Description}";
+        }
+
+        internal override string FormatForHTML(string input)
+        {
+            return input.Replace("\n", "<br />");
         }
     }
 }
