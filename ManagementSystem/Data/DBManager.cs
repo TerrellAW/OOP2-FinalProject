@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ManagementSystem.Components.Pages;
 using ManagementSystem.Exceptions;
+using Microsoft.Maui.Graphics;
 using MySqlConnector;
 
 namespace ManagementSystem
@@ -80,6 +83,41 @@ namespace ManagementSystem
                 catch (DBConnectionException e)
                 {
                     Debug.WriteLine("Connection failed: " + e.Message);
+                }
+            }
+        }
+
+        public static void InsertEvent(string eventName, string eventDate, string eventLocation, string eventDescription, string connStr)
+        {
+            string insertEventQueryStr = "INSERT INTO EventManagementDatabase.Events(EventName, EventDate, EventLocation, EventDescription) VALUES (@EventName, @EventDate, @EventLocation, @EventDescription)";
+
+            using (var conn = new MySqlConnection(connStr))
+            {
+                try
+                {
+                    // Create the SQL command to Insert the Event
+                    MySqlCommand insertEvent = new MySqlCommand(insertEventQueryStr, conn);
+
+                    // Open the connection
+                    conn.Open();
+
+                    insertEvent.Parameters.AddWithValue("@EventName", eventName);
+                    insertEvent.Parameters.AddWithValue("@EventDate", eventDate);
+                    insertEvent.Parameters.AddWithValue("@EventLocation", eventLocation);
+                    insertEvent.Parameters.AddWithValue("@EventDescription", eventDescription);
+
+                    // Execute the SQL command
+                    insertEvent.ExecuteNonQuery();
+
+                    // Close the connection
+                    conn.Close();
+
+                    //Confrim the event creation in the debug console
+                    Debug.WriteLine("Event inserted successfully.");
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("Error inserting event " + e.Message);
                 }
             }
         }
