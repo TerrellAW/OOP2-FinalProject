@@ -11,10 +11,39 @@
         > Form will be used to create Event object
     - If user is brought here from Calendar on home page, display selected day
 -->
-<div class="mt-5 d-flex justify-content-center">
-    <div class="event-manager-button size-medium text-center">Create New Event</div>
+<div class="eventForm">
+    <form @onsubmit="CreateEvent">
+        <label for="eventName" class="form-label">Event Name:</label>
+        <input type="text" id="eventName" class="form-control" @bind="newEvent.EventName" required />
+
+        <label for="eventDate" class="form-label">Event Date:</label>
+        <input type="text" id="eventDate" class="form-control" @bind="newEvent.EventDate" required />
+
+        <label for="eventLocation" class="form-label">Event Location:</label>
+        <input type="text" id="eventLocation" class="form-control" @bind="newEvent.EventLocation" required />
+
+        <label for="eventDescription" class="form-label">Event Description:</label>
+        <input type="text" id="eventDescription" class="form-control" @bind="newEvent.EventDescription" required />
+
+        <button type="submit" class="event-manager-button size-medium text-center">Add Event</button>
+    </form>
 </div>
 
 @code {
-    
+    private Event newEvent = new Event();
+
+    private async Task CreateEvent()
+    {
+        string connStr = "CONNECTION_STRING";
+
+        try
+        {
+            DBManager.InsertEvent(newEvent.EventName, newEvent.EventDate, newEvent.EventLocation, newEvent.EventDescription, connStr);
+            Console.WriteLine("Event successfully added!");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("error" + e.Message);
+        }
+    }
 }

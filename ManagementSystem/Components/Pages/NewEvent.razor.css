@@ -1,0 +1,30 @@
+﻿.evenForm {
+    margin: 0 auto;
+    padding: 19px;
+    border: 1px solid #ccc;
+}
+
+.form-label{
+    display: block;
+    margin: 8px;
+    font-weight: bold;
+}
+
+.form-control {
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+button.event-manager-button {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+button.event-manager-button:hover {
+     background-color: #0056b3;
+}
