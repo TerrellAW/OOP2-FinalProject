@@ -1,12 +1,15 @@
 ﻿<div>
+    <!--X button for closing popup-->
     <div class="d-flex justify-content-end">
         <div class="btn bi bi-x-close" @onclick="ClosePopup"></div>
     </div>
+    <!--Display selected date, events and weather-->
     <div class="d-flex flex-column align-items-center">
         <h2>@SelectedDate.ToString("dd-MM-yyyy")</h2>
         <p>@DisplayEvents()</p>
         <p>@(new MarkupString(GetWeatherForSelectedDate()))</p>
     </div>
+    <!--Button to navigate to new event creation form-->
     <div class="mt-5 d-flex justify-content-center">
         <NavLink href="./new-event" class="event-manager-button size-medium text-center text-decoration-none">Create New Event</NavLink>
     </div>
