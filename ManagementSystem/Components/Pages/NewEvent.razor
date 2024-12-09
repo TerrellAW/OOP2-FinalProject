@@ -12,7 +12,7 @@
     - If user is brought here from Calendar on home page, display selected day
 -->
 <div class="eventForm">
-    <form @onsubmit="CreateEvent">
+    <form @onsubmit="HandleAddEvent">
         <label for="eventName" class="form-label">Event Name:</label>
         <input type="text" id="eventName" class="form-control" @bind="newEvent.EventName" required />
 
@@ -34,18 +34,21 @@
 @code {
     private Event newEvent = new Event();
 
-    private async Task CreateEvent()
+    private async Task HandleAddEvent()
     {
-        string connStr = "CONNECTION_STRING";
+        DBManager.InsertEvent(
+            newEvent.EventName,
+            newEvent.EventDate,
+            newEvent.EventLocation,
+            newEvent.EventDescription,
+            MauiProgram.dbManager.DbConnString
+        );
 
-        try
-        {
-            DBManager.InsertEvent(newEvent.EventName, newEvent.EventDate, newEvent.EventLocation, newEvent.EventDescription, connStr);
-            Console.WriteLine("Event successfully added!");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("error" + e.Message);
-        }
+        ClearForm();
+    }
+
+    private void ClearForm()
+    {
+        newEvent = new Event();
     }
 }
