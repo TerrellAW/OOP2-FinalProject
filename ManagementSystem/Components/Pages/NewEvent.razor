@@ -4,12 +4,7 @@
 
 <!--
     TODO:
-    - Button to create new event
-        > When button is pushed Calendar component is displayed
-            - Display as new page, popup or on New Event page depending on feasibility
-        > When day is selected from Calendar, display form
-        > Form will be used to create Event object
-    - If user is brought here from Calendar on home page, display selected day
+    - Use calendar component for selecting date
 -->
 <div class="eventForm">
     <form @onsubmit="HandleAddEvent">
@@ -34,6 +29,7 @@
 @code {
     private Event newEvent = new Event();
 
+    // Add event to database
     private async Task HandleAddEvent()
     {
         DBManager.InsertEvent(
@@ -47,6 +43,7 @@
         ClearForm();
     }
 
+    // Clear form after adding event
     private void ClearForm()
     {
         newEvent = new Event();

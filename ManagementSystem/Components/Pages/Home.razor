@@ -4,8 +4,15 @@
 
 <h1 class="text-center">Event Management System</h1>
 
+<!-- 
+    Calendar component for displaying days
+-->
 <Calendar DisplayDay="OpenPopup" />
 
+<!--
+    Popup for displaying day details
+    Is only shown when a day is clicked on the calendar
+-->
 @if (showPopup)
 {
     <div class="modal fade show d-block ms-5" tabindex="-1">

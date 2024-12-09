@@ -1,4 +1,6 @@
-﻿<div>
+﻿@page "/day"
+
+<div>
     <!--X button for closing popup-->
     <div class="d-flex justify-content-end">
         <div class="btn bi bi-x-close" @onclick="ClosePopup"></div>
@@ -22,6 +24,7 @@
     [Parameter]
     public EventCallback OnClose { get; set; }
 
+    // Fetch weather data for selected date by matching date
     private string GetWeatherForSelectedDate()
     {
         string date = SelectedDate.ToString("yyyy-MM-dd");

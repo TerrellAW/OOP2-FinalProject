@@ -29,6 +29,7 @@ namespace ManagementSystem
         {
         }
 
+        // Import the connection string from the environment variables
         public void SetConnStr()
         {
             // Load environment variables
@@ -38,6 +39,7 @@ namespace ManagementSystem
             dbConnString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
         }
 
+        // Create the database if it does not exist
         public static void CreateDatabase(string connStr)
         {
             using (var conn = new MySqlConnection(connStr))
@@ -72,6 +74,7 @@ namespace ManagementSystem
             }
         }
 
+        // Create the table if it does not exist
         public static void CreateTable(string connStr)
         {
             using (var conn = new MySqlConnection(connStr))
@@ -107,6 +110,7 @@ namespace ManagementSystem
             }
         }
 
+        // Get the maximum ID from the database
         public static int GetMaxID(MySqlConnection conn)
         {
             string getMaxIDQueryStr = "SELECT MAX({EventID}) FROM EventManagementDatabase.Events";
@@ -125,6 +129,7 @@ namespace ManagementSystem
             }
         }
 
+        // Insert an event into the database
         public static void InsertEvent(string eventName, string eventDate, string eventLocation, string eventDescription, string connStr)
         {
             string insertEventQueryStr = "INSERT INTO EventManagementDatabase.Events(EventID, EventName, EventDate, EventLocation, EventDescription) VALUES (@EventID, @EventName, @EventDate, @EventLocation, @EventDescription)";
