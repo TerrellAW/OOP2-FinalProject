@@ -4,6 +4,9 @@ namespace ManagementSystem
 {
     public static class MauiProgram
     {
+        // Initialize static DBManager object for use across the application
+        internal static DBManager dbManager = new DBManager();
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();

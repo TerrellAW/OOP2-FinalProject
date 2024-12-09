@@ -79,24 +79,20 @@
     }
     private static void FetchDatabase()
     {
-        // Load environment variables
-        Env.Load();
+        MauiProgram.dbManager.SetConnStr();
 
-        // Fetch Database connection string
-        var dbConnString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-        
         // Check if Database connection string is null or empty
-        if (string.IsNullOrEmpty(dbConnString))
+        if (string.IsNullOrEmpty(MauiProgram.dbManager.DbConnString))
         {
             throw new DBConnectionException("Database connection string is null or empty.");
         }
         else
         {
             // Create Database
-            DBManager.CreateDatabase(dbConnString);
+            DBManager.CreateDatabase(MauiProgram.dbManager.DbConnString);
 
             // Create Table
-            DBManager.CreateTable(dbConnString);
+            DBManager.CreateTable(MauiProgram.dbManager.DbConnString);
         }
     }
 
