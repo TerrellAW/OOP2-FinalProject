@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotNetEnv;
 using ManagementSystem.Components.Pages;
 using ManagementSystem.Exceptions;
 using Microsoft.Maui.Graphics;
@@ -14,8 +15,27 @@ namespace ManagementSystem
 {
     internal class DBManager
     {
+        private string dbConnString = "";
+
+        public string DbConnString
+        {
+            get
+            {
+                return dbConnString;
+            }
+        }
+
         internal DBManager()
         {
+        }
+
+        public void SetConnStr()
+        {
+            // Load environment variables
+            Env.Load();
+
+            // Fetch Database connection string
+            dbConnString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
         }
 
         public static void CreateDatabase(string connStr)
@@ -45,7 +65,7 @@ namespace ManagementSystem
                     // Confirm the database creation in the debug console
                     Debug.WriteLine("Database created successfully.");
                 }
-                catch (DBConnectionException e)
+                catch (MySqlException e)
                 {
                     Debug.WriteLine("Connection failed: " + e.Message);
                 }
@@ -80,16 +100,34 @@ namespace ManagementSystem
                     // Confirm the table creation in the debug console
                     Debug.WriteLine("Table created successfully.");
                 }
-                catch (DBConnectionException e)
+                catch (MySqlException e)
                 {
                     Debug.WriteLine("Connection failed: " + e.Message);
                 }
             }
         }
 
+        public static int GetMaxID(MySqlConnection conn)
+        {
+            string getMaxIDQueryStr = "SELECT MAX({EventID}) FROM EventManagementDatabase.Events";
+
+            try
+            {
+                using (var getMaxID = new MySqlCommand(getMaxIDQueryStr, conn))
+                {
+                    return (int)getMaxID.ExecuteScalar();
+                }
+            }
+            catch (MySqlException e)
+            {
+                Debug.WriteLine("Error getting max ID " + e.Message);
+                return 0;
+            }
+        }
+
         public static void InsertEvent(string eventName, string eventDate, string eventLocation, string eventDescription, string connStr)
         {
-            string insertEventQueryStr = "INSERT INTO EventManagementDatabase.Events(EventName, EventDate, EventLocation, EventDescription) VALUES (@EventName, @EventDate, @EventLocation, @EventDescription)";
+            string insertEventQueryStr = "INSERT INTO EventManagementDatabase.Events(EventID, EventName, EventDate, EventLocation, EventDescription) VALUES (@EventID, @EventName, @EventDate, @EventLocation, @EventDescription)";
 
             using (var conn = new MySqlConnection(connStr))
             {
@@ -101,6 +139,19 @@ namespace ManagementSystem
                     // Open the connection
                     conn.Open();
 
+                    int maxID = GetMaxID(conn);
+                    int currID;
+                    
+                    if (maxID == 0)
+                    {
+                        currID = 0;
+                    }
+                    else
+                    {
+                        currID = maxID++;
+                    }
+
+                    insertEvent.Parameters.AddWithValue("@EventID", currID);
                     insertEvent.Parameters.AddWithValue("@EventName", eventName);
                     insertEvent.Parameters.AddWithValue("@EventDate", eventDate);
                     insertEvent.Parameters.AddWithValue("@EventLocation", eventLocation);
@@ -115,7 +166,7 @@ namespace ManagementSystem
                     //Confrim the event creation in the debug console
                     Debug.WriteLine("Event inserted successfully.");
                 }
-                catch (Exception e)
+                catch (MySqlException e)
                 {
                     Debug.WriteLine("Error inserting event " + e.Message);
                 }
