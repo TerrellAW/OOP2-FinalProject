@@ -21,6 +21,5 @@ namespace ManagementSystem
         public string EventDate { get; set; }
         public string EventLocation { get; set; }
         public string EventDescription { get; set; }
-
     }
 }
