@@ -10,5 +10,11 @@
 -->
 
 @code {
-    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        // Fetch events from database
+        DBManager.ReadDatabase(MauiProgram.dbManager.DbConnString);
+    }
 }

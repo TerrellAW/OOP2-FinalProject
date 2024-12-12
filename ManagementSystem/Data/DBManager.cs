@@ -177,5 +177,42 @@ namespace ManagementSystem
                 }
             }
         }
+        public static void ReadDatabase(string connStr)
+        {
+            string readDatabaseQueryStr = "SELECT * FROM EventManagementDatabase.Events";
+
+            using (var conn = new MySqlConnection(connStr))
+            {
+                try
+                {
+                    // Create the SQL command to read the database
+                    MySqlCommand readDatabase = new MySqlCommand(readDatabaseQueryStr, conn);
+
+                    // Open the connection
+                    conn.Open();
+
+                    // Execute the SQL command
+                    using (var reader = readDatabase.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Event @event = new Event(reader["EventName"].ToString(), reader["EventDate"].ToString(), reader["EventLocation"].ToString(), reader["EventDescription"].ToString());
+                            Debug.WriteLine(reader["EventID"] + " " + reader["EventName"] + " " + reader["EventDate"] + " " + reader["EventLocation"] + " " + reader["EventDescription"]);
+                            Event.eventList.Add(@event);
+                        }
+                    }
+
+                    // Close the connection
+                    conn.Close();
+
+                    // Confirm the database read in the debug console
+                    Debug.WriteLine("Database read successfully.");
+                }
+                catch (MySqlException e)
+                {
+                    Debug.WriteLine("Error reading database " + e.Message);
+                }
+            }
+        }
     }
 }
