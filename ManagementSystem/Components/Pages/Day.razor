@@ -1,4 +1,5 @@
 ﻿@page "/day"
+@inject NavigationManager NavigationManager
 
 <div>
     <!--X button for closing popup-->
@@ -13,7 +14,7 @@
     </div>
     <!--Button to navigate to new event creation form-->
     <div class="mt-5 d-flex justify-content-center">
-        <NavLink href="./new-event" class="event-manager-button size-medium text-center text-decoration-none">Create New Event</NavLink>
+        <button @onclick="PassSelectedDateToNewEvent" class="event-manager-button size-medium text-center text-decoration-none">Create New Event</button>
     </div>
 </div>
 
@@ -35,7 +36,7 @@
         {
             return "No weather data available.";
         }
-        string weatherString = matchingWeather.ToString();
+        string weatherString = matchingWeather.ToString().Substring(21);
         return matchingWeather.FormatForHTML(weatherString);
     }
 
@@ -43,6 +44,12 @@
     {
         //TODO: Display list of events for selected date
         return "No events on this day.";
+    }
+
+    private void PassSelectedDateToNewEvent()
+    {
+        string formattedDate = SelectedDate.ToString("yyyy-MM-dd");
+        NavigationManager.NavigateTo($"/new-event?SelectedDate={formattedDate}");
     }
 
     private async Task ClosePopup()

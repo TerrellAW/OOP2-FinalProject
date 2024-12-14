@@ -1,4 +1,5 @@
 ﻿@page "/new-event"
+@inject NavigationManager NavigationManager
 
 <h1 class="text-center">New Event</h1>
 
@@ -11,7 +12,7 @@
         <label for="eventName" class="form-label">Event Name:</label>
         <input type="text" id="eventName" class="form-control" @bind="newEvent.EventName" required />
 
-        <label for="eventDate" class="form-label">Event Date:</label>
+        <label for="eventDate" class="form-label">Event Date (yyyy-mm-dd):</label>
         <input type="text" id="eventDate" class="form-control" @bind="newEvent.EventDate" required />
 
         <label for="eventLocation" class="form-label">Event Location:</label>
@@ -28,6 +29,15 @@
 
 @code {
     private Event newEvent = new Event();
+
+    [Parameter]
+    public string SelectedDate { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        newEvent.EventDate = SelectedDate;
+        await base.OnParametersSetAsync();
+    }
 
     // Add event to database
     private async Task HandleAddEvent()
