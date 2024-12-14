@@ -43,6 +43,14 @@
             await FetchWeatherAPI();
             FetchDatabase();
         }
+
+        // Fetch Events from Database once
+        if (Event.eventList == null || Event.eventList.IsEmpty() == true)
+        {
+            DBManager.ReadDatabase(MauiProgram.dbManager.DbConnString);
+            Debug.WriteLine("Event list contains:");
+            Event.eventList.PrintData(Event.eventList.Size);
+        }
     }
 
     /// <summary>

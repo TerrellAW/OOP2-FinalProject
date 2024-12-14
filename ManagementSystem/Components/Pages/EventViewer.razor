@@ -4,12 +4,15 @@
 
 <!--
     TODO:
-    - Display list of events
-    - Display detailed information for selected event
-    - If user rerouted from Home Calendar, display selected day
+    - If SelectedEvent != null display detailed information for selected event
+    - If SelectedEvent == null display list of events
 -->
 
 @code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "SelectedEvent")]
+    public Event? SelectedEvent { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();

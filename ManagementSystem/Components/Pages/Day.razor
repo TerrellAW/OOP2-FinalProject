@@ -9,7 +9,7 @@
     <!--Display selected date, events and weather-->
     <div class="d-flex flex-column align-items-center">
         <h2>@SelectedDate.ToString("dd-MM-yyyy")</h2>
-        <p>@DisplayEvents()</p>
+        <div @onclick="() => PassSelectedEventToEventViewer(matchingEvent)" class="event-manager-button size-large text-center">@DisplayEvents()</div>
         <p>@(new MarkupString(GetWeatherForSelectedDate()))</p>
     </div>
     <!--Button to navigate to new event creation form-->
@@ -24,6 +24,8 @@
 
     [Parameter]
     public EventCallback OnClose { get; set; }
+
+    Event? matchingEvent;
 
     // Fetch weather data for selected date by matching date
     private string GetWeatherForSelectedDate()
@@ -42,8 +44,15 @@
 
     private string DisplayEvents()
     {
-        //TODO: Display list of events for selected date
-        return "No events on this day.";
+        string date = SelectedDate.ToString("yyyy-MM-dd");
+
+        matchingEvent = Event.eventList.GetEventByDate(date);
+
+        if (matchingEvent == null)
+        {
+            return "No events on this day.";
+        }
+        return matchingEvent.ToString();
     }
 
     private void PassSelectedDateToNewEvent(DateTime date)
@@ -51,6 +60,14 @@
         date = SelectedDate;
         string formattedDate = date.ToString("yyyy-MM-dd");
         string url = $"/new-event?SelectedDate={formattedDate}";
+        Debug.WriteLine($"Navigating to: {url}");
+        NavigationManager.NavigateTo(url);
+    }
+
+    private void PassSelectedEventToEventViewer(Event selectedEvent)
+    {
+        Event.eventList.GetEventByDate(selectedEvent.EventDate);
+        string url = $"/event-viewer?SelectedEvent={selectedEvent.EventName}";
         Debug.WriteLine($"Navigating to: {url}");
         NavigationManager.NavigateTo(url);
     }

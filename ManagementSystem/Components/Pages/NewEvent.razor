@@ -42,7 +42,7 @@
     }
 
     // Add event to database
-    private async Task HandleAddEvent()
+    private void HandleAddEvent()
     {
         DBManager.InsertEvent(
             newEvent.EventName,
@@ -53,6 +53,14 @@
         );
 
         ClearForm();
+    }
+
+    private void HandleNullDate()
+    {
+        if (newEvent.EventDate == null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
     }
 
     // Clear form after adding event

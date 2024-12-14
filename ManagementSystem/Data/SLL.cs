@@ -103,6 +103,7 @@ namespace ManagementSystem
             }
             return currNode.Data;
         }
+
         // Returns a field from an object stored in the list if it matches the data passed in.
         public Weather? GetWeatherDataByDate(string date)
         {
@@ -116,6 +117,36 @@ namespace ManagementSystem
                 }
                 currNode = currNode.Next;
             }
+            return null;
+        }
+
+        // Returns event data from the list if it matches the data passed in.
+        public Event? GetEventByDate(string date)
+        {
+            Node? currNode = _head;
+            Debug.WriteLine($"Searching for date: {date}");
+            Debug.WriteLine($"Current list size: {_size}");
+
+            while (currNode != null)
+            {
+                Debug.WriteLine($"Current node data type: {currNode.Data?.GetType()}");
+                Debug.WriteLine($"Current node data: {currNode.Data}");
+                if (currNode.Data is Event varEvent && !string.IsNullOrEmpty(varEvent.EventDate))
+                {
+                    Debug.WriteLine($"Checking event: {varEvent.EventName} with date: {varEvent.EventDate}");
+
+                    string eventDateOnly = varEvent.EventDate.Split(' ')[0];
+                    
+                    if (eventDateOnly == date)
+                    {
+                        Debug.WriteLine("Event found: " + varEvent.EventName);
+                        return varEvent;
+                    }
+                    
+                }
+                currNode = currNode.Next;
+            }
+            Debug.WriteLine("No matching event found.");
             return null;
         }
     }

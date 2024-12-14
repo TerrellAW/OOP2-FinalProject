@@ -196,7 +196,7 @@ namespace ManagementSystem
                     {
                         while (reader.Read())
                         {
-                            Event @event = new Event(reader["EventName"].ToString(), reader["EventDate"].ToString(), reader["EventLocation"].ToString(), reader["EventDescription"].ToString());
+                            Event @event = new Event(reader["EventName"].ToString(), reader["EventDate"].ToString().Substring(0, 10), reader["EventLocation"].ToString(), reader["EventDescription"].ToString());
                             Debug.WriteLine(reader["EventID"] + " " + reader["EventName"] + " " + reader["EventDate"] + " " + reader["EventLocation"] + " " + reader["EventDescription"]);
                             Event.eventList.Add(@event);
                         }
