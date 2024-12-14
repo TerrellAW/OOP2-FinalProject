@@ -14,7 +14,7 @@
     </div>
     <!--Button to navigate to new event creation form-->
     <div class="mt-5 d-flex justify-content-center">
-        <button @onclick="PassSelectedDateToNewEvent" class="event-manager-button size-medium text-center text-decoration-none">Create New Event</button>
+        <button @onclick="() => PassSelectedDateToNewEvent(SelectedDate)" class="event-manager-button size-medium text-center text-decoration-none">Create New Event</button>
     </div>
 </div>
 
@@ -46,10 +46,13 @@
         return "No events on this day.";
     }
 
-    private void PassSelectedDateToNewEvent()
+    private void PassSelectedDateToNewEvent(DateTime date)
     {
-        string formattedDate = SelectedDate.ToString("yyyy-MM-dd");
-        NavigationManager.NavigateTo($"/new-event?SelectedDate={formattedDate}");
+        date = SelectedDate;
+        string formattedDate = date.ToString("yyyy-MM-dd");
+        string url = $"/new-event?SelectedDate={formattedDate}";
+        Debug.WriteLine($"Navigating to: {url}");
+        NavigationManager.NavigateTo(url);
     }
 
     private async Task ClosePopup()

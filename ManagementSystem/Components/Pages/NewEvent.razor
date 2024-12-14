@@ -31,11 +31,13 @@
     private Event newEvent = new Event();
 
     [Parameter]
+    [SupplyParameterFromQuery(Name = "SelectedDate")]
     public string SelectedDate { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
         newEvent.EventDate = SelectedDate;
+        Debug.WriteLine($"Selected date: {SelectedDate}");
         await base.OnParametersSetAsync();
     }
 
