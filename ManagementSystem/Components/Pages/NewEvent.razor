@@ -13,7 +13,7 @@
         <input type="text" id="eventName" class="form-control" @bind="newEvent.EventName" required />
 
         <label for="eventDate" class="form-label">Event Date (yyyy-mm-dd):</label>
-        <input type="text" id="eventDate" class="form-control" @bind="newEvent.EventDate" required />
+        <input @onfocus="HandleNullDate" type="text" id="eventDate" class="form-control" @bind="newEvent.EventDate" required />
 
         <label for="eventLocation" class="form-label">Event Location:</label>
         <input type="text" id="eventLocation" class="form-control" @bind="newEvent.EventLocation" required />

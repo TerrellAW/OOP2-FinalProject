@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem
 {
-    internal class Node
+    public class Node
     {
         private object _data;
         private Node? _next;

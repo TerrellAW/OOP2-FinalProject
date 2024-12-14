@@ -11,7 +11,7 @@ namespace ManagementSystem
     /// <summary>
     /// Implementation of the ILinkedListADT interface.
     /// </summary>
-    internal class SLL : ILinkedListADT
+    public class SLL : ILinkedListADT
     {
         private Node? _head;
         private int _size;

@@ -12,7 +12,7 @@ namespace ManagementSystem
     /// The class is a template that specifies what data is needed from the API response.
     /// The ToString method is overridden to provide a string representation of the object for use in the application.
     /// </summary>
-    internal class Weather : Format
+    public class Weather : Format
     {
         // Fields
         private string _date;
