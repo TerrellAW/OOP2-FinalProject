@@ -17,7 +17,7 @@ namespace ManagementSystem
     /// 3. PrintData() - Prints the data in the list.
     /// 4. GetFromIndex() - Returns an object stored at a specific index.
     /// </summary>
-    public class SLL : ILinkedListADT
+    public abstract class SLL : ILinkedListADT
     {
         private Node? _head;
         private int _size;
