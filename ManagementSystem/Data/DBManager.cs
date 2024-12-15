@@ -224,7 +224,7 @@ namespace ManagementSystem
                     MySqlCommand readDatabase = new MySqlCommand(readDatabaseQueryStr, conn);
 
                     // Clear the event list
-                    Event.eventList = new SLL();
+                    Event.eventList = new EventList();
 
                     // Open the connection
                     conn.Open();

@@ -14,7 +14,7 @@ namespace ManagementSystem
         private string _date;
         private string _location;
         private string _description;
-        public static SLL eventList = new SLL();
+        public static EventList eventList = new EventList();
 
         // Properties
         public string EventName 

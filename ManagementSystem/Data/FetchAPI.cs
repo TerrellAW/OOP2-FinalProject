@@ -34,7 +34,7 @@ namespace ManagementSystem
     internal class FetchAPI
     {
         // Lists
-        internal static SLL weatherList = new SLL();
+        internal static WeatherList weatherList = new WeatherList();
 
         // Methods
         internal static async Task FetchWeather(string apiUrl)
