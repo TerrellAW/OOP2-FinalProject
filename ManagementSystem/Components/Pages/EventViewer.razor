@@ -40,8 +40,11 @@
     private Event? selectedEvent;
     private List<Event> events = new List<Event>();
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
+        // Read Database
+        DBManager.ReadDatabase(MauiProgram.dbManager.DbConnString);
+
         // Populate events list
         PopulateEventList();
 
@@ -49,6 +52,8 @@
         {
             selectedEvent = events.FirstOrDefault(e => e.EventName == EventName);
         }
+
+        base.OnParametersSet();
     }
 
     private void PopulateEventList()
