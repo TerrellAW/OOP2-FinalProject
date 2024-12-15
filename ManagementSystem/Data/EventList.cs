@@ -9,7 +9,11 @@ using ManagementSystem.Exceptions;
 namespace ManagementSystem
 {
     /// <summary>
-    /// Implementation of the ILinkedListADT interface.
+    /// Extends the SLL class and adds additional methods for managing events.
+    /// 
+    /// Methods:
+    /// 1. GetEventByDate(string date) - Returns an event object from the list if it has the same date as the one passed in.
+    /// 2. ListEvents() - Return a list of events that can be used in a foreach loop.
     /// </summary>
     public class EventList : SLL
     {

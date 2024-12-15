@@ -19,9 +19,11 @@
 </div>
 
 @code {
+    // DateTime object import as parameter
     [Parameter]
     public DateTime SelectedDate { get; set; }
 
+    // EventCallback for closing popup imported as parameter
     [Parameter]
     public EventCallback OnClose { get; set; }
 
@@ -42,6 +44,7 @@
         return matchingWeather.FormatForHTML(weatherString);
     }
 
+    // Display events for selected date
     private string DisplayEvents()
     {
         string date = SelectedDate.ToString("yyyy-MM-dd");
@@ -55,6 +58,7 @@
         return matchingEvent.ToString();
     }
 
+    // Pass selected date to new event creation form
     private void PassSelectedDateToNewEvent(DateTime date)
     {
         date = SelectedDate;
@@ -64,6 +68,7 @@
         NavigationManager.NavigateTo(url);
     }
 
+    // Pass selected event to event viewer
     private void PassSelectedEventToEventViewer(Event selectedEvent)
     {
         if (selectedEvent == null)
@@ -76,6 +81,7 @@
         NavigationManager.NavigateTo(url);
     }
 
+    // Close popup
     private async Task ClosePopup()
     {
         await OnClose.InvokeAsync(null);

@@ -10,6 +10,12 @@ namespace ManagementSystem
 {
     /// <summary>
     /// Implementation of the ILinkedListADT interface.
+    /// 
+    /// Methods:
+    /// 1. IsEmpty() - Checks if the list is empty.
+    /// 2. Add() - Adds a new node to the end of the list.
+    /// 3. PrintData() - Prints the data in the list.
+    /// 4. GetFromIndex() - Returns an object stored at a specific index.
     /// </summary>
     public class SLL : ILinkedListADT
     {

@@ -62,7 +62,7 @@ namespace ManagementSystem
             }
         }
 
-        // Constructor
+        // Constructors
         public Event(string name, string date, string location, string description)
         {
             _name = name;

@@ -9,7 +9,10 @@ using ManagementSystem.Exceptions;
 namespace ManagementSystem
 {
     /// <summary>
-    /// Implementation of the ILinkedListADT interface.
+    /// Extends the SLL class and adds additional methods for managing weather data.
+    /// 
+    /// Methods:
+    /// 1. GetWeatherDataByDate(string date) - Returns a weather object from the list if it is for the date passed in.
     /// </summary>
     public class WeatherList : SLL
     {

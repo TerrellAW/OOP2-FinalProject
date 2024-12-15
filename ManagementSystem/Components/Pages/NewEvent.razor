@@ -2,11 +2,6 @@
 @inject NavigationManager NavigationManager
 
 <h1 class="text-center">New Event</h1>
-
-<!--
-    TODO:
-    - Use calendar component for selecting date
--->
 <div class="eventForm">
     <form @onsubmit="HandleAddEvent">
         <label for="eventName" class="form-label">Event Name:</label>
@@ -30,10 +25,12 @@
 @code {
     private Event newEvent = new Event();
 
+    // Selected date imported from Calendar as a parameter
     [Parameter]
     [SupplyParameterFromQuery(Name = "SelectedDate")]
     public string SelectedDate { get; set; }
 
+    // Update event date when SelectedDate changes
     protected override async Task OnParametersSetAsync()
     {
         newEvent.EventDate = SelectedDate;
@@ -55,6 +52,7 @@
         ClearForm();
     }
 
+    // Prevent incompatible date format by redirecting to Calendar component on the home page
     private void HandleNullDate()
     {
         if (newEvent.EventDate == null)

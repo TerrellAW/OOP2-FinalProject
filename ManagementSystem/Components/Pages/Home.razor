@@ -1,4 +1,4 @@
-﻿<!-- Use _Imports.razor for all using directives -->
+﻿<!-- Used _Imports.razor for all using directives -->
 
 @page "/"
 
@@ -92,6 +92,11 @@
             await FetchAPI.FetchWeather(apiUrl);
         }
     }
+
+    /// <summary>
+    /// FetchDatabase method fetches the database connection string from the DBManager class.
+    /// </summary>
+    /// <exception cref="DBConnectionException"></exception>
     private static void FetchDatabase()
     {
         MauiProgram.dbManager.SetConnStr();
@@ -111,12 +116,14 @@
         }
     }
 
+    // OpenPopup method is called when a day is clicked on the calendar
     private void OpenPopup(DateTime date)
     {
         selectedDate = date;
         showPopup = true;
     }
 
+    // ClosePopup method is called when the X button is clicked on the popup
     private void ClosePopup()
     {
         showPopup = false;

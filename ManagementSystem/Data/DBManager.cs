@@ -13,6 +13,18 @@ using MySqlConnector;
 
 namespace ManagementSystem
 {
+    /// <summary>
+    /// Class to manage the database connection and operations
+    /// 
+    /// Methods:
+    /// 1. Import the connection string from the environment variables
+    /// 2. Create the database if it does not exist
+    /// 3. Create the table if it does not exist
+    /// 4. Get the maximum ID from the database
+    /// 5. Insert an event into the database
+    /// 6. Remove an event from the database
+    /// 7. Read the database and add data to the static event list
+    /// </summary>
     internal class DBManager
     {
         private string dbConnString = "";
@@ -212,6 +224,7 @@ namespace ManagementSystem
             }
         }
 
+        // Read the database and add data to the static event list
         public static void ReadDatabase(string connStr)
         {
             string readDatabaseQueryStr = "SELECT * FROM EventManagementDatabase.Events";
