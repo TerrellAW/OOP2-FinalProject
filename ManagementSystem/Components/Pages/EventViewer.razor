@@ -1,6 +1,7 @@
 ﻿@page "/event-viewer"
+@inject NavigationManager NavigationManager
 
-<h1>Event Viewer</h1>
+<h1 class="text-center">Event Viewer</h1>
 
 <!--
     TODO:
@@ -8,16 +9,58 @@
     - If SelectedEvent == null display list of events
 -->
 
+<div>
+    @if (selectedEvent != null)
+    {
+        <h2 class="text-center">Event Details</h2>
+        <div>
+            <h3>@selectedEvent.EventName</h3>
+            <p>Date: @selectedEvent.EventDate</p>
+            <p>Location: @selectedEvent.EventLocation</p>
+            <p>Description: @selectedEvent.EventDescription</p>
+        </div>
+    }
+    <h2 class="text-center">Events</h2>
+    <ul>
+        @foreach (var e in events)
+        {
+            <li>
+                <button type="button" @onclick="() => HandleSelectEvent(e)" class="event-manager-button size-large text-center text-decoration-none">@e.ToString()</button>
+            </li>
+        }
+    </ul>
+</div>
+
 @code {
     [Parameter]
     [SupplyParameterFromQuery(Name = "SelectedEvent")]
-    public Event? SelectedEvent { get; set; }
+    public string EventName { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    private Event? selectedEvent;
+    private List<Event> events = new List<Event>();
+
+    protected override void OnInitialized()
     {
-        await base.OnInitializedAsync();
+        // Populate events list
+        PopulateEventList();
 
-        // Fetch events from database
-        DBManager.ReadDatabase(MauiProgram.dbManager.DbConnString);
+        if (!string.IsNullOrEmpty(EventName))
+        {
+            selectedEvent = events.FirstOrDefault(e => e.EventName == EventName);
+        }
+    }
+
+    private void PopulateEventList()
+    {
+        events = Event.eventList.ListEvents();
+        Debug.WriteLine($"Events in Event Viewer: {events.Count}");
+    }
+
+    private void HandleSelectEvent(Event selected)
+    {
+        selectedEvent = selected;
+        string url = $"/event-viewer?SelectedEvent={selected.EventName}";
+        Debug.WriteLine($"Navigating to: {url}");
+        NavigationManager.NavigateTo(url);
     }
 }

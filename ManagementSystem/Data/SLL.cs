@@ -149,5 +149,22 @@ namespace ManagementSystem
             Debug.WriteLine("No matching event found.");
             return null;
         }
+
+        // Return a list of events
+        public List<Event> ListEvents()
+        {
+            List<Event> events = new List<Event>();
+            Node? currNode = _head;
+
+            while (currNode != null)
+            {
+                if (currNode.Data is Event varEvent)
+                {
+                    events.Add(varEvent);
+                }
+                currNode = currNode.Next;
+            }
+            return events;
+        }
     }
 }
