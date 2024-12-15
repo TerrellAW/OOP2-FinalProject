@@ -66,6 +66,10 @@
 
     private void PassSelectedEventToEventViewer(Event selectedEvent)
     {
+        if (selectedEvent == null)
+        {
+            return;
+        }
         Event.eventList.GetEventByDate(selectedEvent.EventDate);
         string url = $"/event-viewer?SelectedEvent={selectedEvent.EventName}";
         Debug.WriteLine($"Navigating to: {url}");
