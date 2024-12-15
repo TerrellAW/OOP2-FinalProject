@@ -177,6 +177,41 @@ namespace ManagementSystem
                 }
             }
         }
+
+        // Remove an event from the database
+        public static void RemoveEvent(string eventName, string eventDate, string connStr)
+        {
+            string removeEventQueryStr = "DELETE FROM EventManagementDatabase.Events WHERE EventName = @EventName AND EventDate = @EventDate";
+
+            using (var conn = new MySqlConnection(connStr))
+            {
+                try
+                {
+                    // Create the SQL command to remove the event
+                    MySqlCommand removeEvent = new MySqlCommand(removeEventQueryStr, conn);
+
+                    // Open the connection
+                    conn.Open();
+
+                    removeEvent.Parameters.AddWithValue("@EventName", eventName);
+                    removeEvent.Parameters.AddWithValue("@EventDate", eventDate);
+
+                    // Execute the SQL command
+                    removeEvent.ExecuteNonQuery();
+
+                    // Close the connection
+                    conn.Close();
+
+                    // Confirm the event removal in the debug console
+                    Debug.WriteLine("Event removed successfully.");
+                }
+                catch (MySqlException e)
+                {
+                    Debug.WriteLine("Error removing event " + e.Message);
+                }
+            }
+        }
+
         public static void ReadDatabase(string connStr)
         {
             string readDatabaseQueryStr = "SELECT * FROM EventManagementDatabase.Events";
@@ -187,6 +222,9 @@ namespace ManagementSystem
                 {
                     // Create the SQL command to read the database
                     MySqlCommand readDatabase = new MySqlCommand(readDatabaseQueryStr, conn);
+
+                    // Clear the event list
+                    Event.eventList = new SLL();
 
                     // Open the connection
                     conn.Open();

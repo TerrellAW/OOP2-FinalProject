@@ -25,7 +25,8 @@
         @foreach (var e in events)
         {
             <li>
-                <button type="button" @onclick="() => HandleSelectEvent(e)" class="event-manager-button size-large text-center text-decoration-none">@e.ToString()</button>
+                <button type="button" @onclick="() => HandleSelectEvent(e)" class="event-manager-button size-large text-center">@e.ToString()</button>
+                <button type="button" @onclick="() => HandleRemoveEvent(e)" class="event-remove-button size-medium text-center">Remove</button>
             </li>
         }
     </ul>
@@ -52,6 +53,7 @@
 
     private void PopulateEventList()
     {
+        events = new List<Event>();
         events = Event.eventList.ListEvents();
         Debug.WriteLine($"Events in Event Viewer: {events.Count}");
     }
@@ -62,5 +64,13 @@
         string url = $"/event-viewer?SelectedEvent={selected.EventName}";
         Debug.WriteLine($"Navigating to: {url}");
         NavigationManager.NavigateTo(url);
+    }
+
+    private void HandleRemoveEvent(Event selected)
+    {
+        DBManager.RemoveEvent(selected.EventName, selected.EventDate, MauiProgram.dbManager.DbConnString);
+        DBManager.ReadDatabase(MauiProgram.dbManager.DbConnString);
+        PopulateEventList();
+        StateHasChanged();
     }
 }
